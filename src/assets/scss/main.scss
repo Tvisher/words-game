@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap");
+@import "reset.scss";
+
+.words-creator {
+  font-family: "Montserrat", sans-serif;
+  max-width: 900px;
+  background-color: #ebf4ff;
+  margin: 20px auto;
+}
+
+.letter-input {
+  font-family: "Inter", sans-serif;
+  text-transform: uppercase;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid red;
+  display: block;
+  text-align: center;
+  font-size: 28px;
+  margin: 0;
+  outline: none;
+}
+.word-letters {
+  margin: 20px 0;
+  display: flex;
+  gap: 10px;
+}
+
+.word__container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.word-textarea {
+  resize: none;
+  width: 100%;
+  min-height: 100px;
+  border-radius: 4px;
+  border: 1px solid rgba(0, 66, 105, 0.28);
+  padding: 10px;
+}
+.word__field {
+  text-align: left;
+  width: 100%;
+  margin: 20px 0;
+}
+.word__title {
+  color: #262b31;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: rgba(38, 43, 49, 1);
+}
+.word__descr {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 120%;
+  color: rgba(117, 117, 117, 1);
+}
+
+.toggle-head,
+.toggle-body {
+  padding: 20px;
+}
+.toggle-head {
+  font-size: 22px;
+  font-weight: 600;
+  position: relative;
+  color: rgba(32, 32, 32, 1);
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 20px;
+    height: 1px;
+    background-color: rgba(184, 202, 213, 1);
+    bottom: 0px;
+    width: calc(100% - 40px);
+  }
+}
+
+.add-word {
+  cursor: pointer;
+  color: rgba(250, 0, 86, 1);
+  border: 1px solid rgba(250, 0, 86, 1);
+  border-radius: 4px;
+  padding: 8px 18px;
+  font-size: 16px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffe7ef;
+
+  svg {
+    margin-left: 10px;
+  }
+}
