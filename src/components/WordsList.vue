@@ -7,8 +7,10 @@
       <div class="word__container">
         <WordCreate
           v-for="(word, index) in wordsList"
-          :key="index"
+          :key="word.id"
           :wordData="word"
+          :wordsLength="wordsList.length"
+          @wordRemove="wordRemove"
         />
         <button class="add-word" @click="addWord">
           Добавить слово
@@ -44,6 +46,7 @@
 import WordCreate from "./WordCreate.vue";
 import { useGameSettings } from "@/stores/GameSettings";
 import { storeToRefs } from "pinia";
+import { v4 as uuidv4 } from "uuid";
 
 const store = useGameSettings();
 
@@ -51,10 +54,17 @@ const { wordsList } = storeToRefs(store);
 
 const addWord = () => {
   wordsList.value.push({
+    id: uuidv4(),
     word: [],
     theme: "",
     prompt: "",
   });
+};
+
+const wordRemove = (id) => {
+  if (wordsList.value.length > 1) {
+    wordsList.value = wordsList.value.filter((word) => word.id !== id);
+  }
 };
 </script>
 <style lang="scss"></style>
