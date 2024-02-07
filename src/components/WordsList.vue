@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="settings-item">
     <div class="toggle-head">
       <span>1. Слово</span>
     </div>

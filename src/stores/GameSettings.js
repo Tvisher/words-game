@@ -10,23 +10,79 @@ export const useGameSettings = defineStore("GameSettings", () => {
             id: "1",
             word: ["с", "л", "о", "в", "о",],
             theme: "Букварь какой нибудь",
-            prompt: "Это бувально 'СЛОВО'"
+            prompt: "Это буквально 'СЛОВО'"
         }
     ]);
     const gameDescription = ref('');
     // min 3 max 7
     const testWordsCount = ref(3);
-    const backgroundUrl = ref('');
+    const backgroundUrl = ref({
+        name: '',
+        path: ''
+    });
     const colors = ref(
         {
-            borderColors: [],
-            textColors: []
+            borderColor: [
+                {
+                    "name": "Intercom",
+                    "value": "#FA0056"
+                },
+                {
+                    "name": "Оранжевый",
+                    "value": "#FF6B00"
+                },
+                {
+                    "name": "Зеленый",
+                    "value": "#24D421"
+                },
+                {
+                    "name": "Морской",
+                    "value": "#13EADD"
+                },
+                {
+                    "name": "Желтый",
+                    "value": "#FFD600"
+                },
+                {
+                    "name": "Салатовый",
+                    "value": "#BDFF00"
+                },
+                {
+                    "name": "Синий",
+                    "value": "#1369EA"
+                },
+                {
+                    "name": "Фиолетовый",
+                    "value": "#7213EA"
+                },
+                {
+                    "name": "Пурпурный",
+                    "value": "#EA13D4"
+                }
+            ],
+            textColor: [
+                {
+                    "name": "Чёрный",
+                    "value": "#000000 "
+                },
+                {
+                    "name": "Белый",
+                    "value": "#FFFFFF"
+                }
+
+            ]
         }
     );
     const selectedColors = ref(
         {
-            borderColor: null,
-            textColor: null
+            borderColor: {
+                "name": "Intercom",
+                "value": "#FA0056"
+            },
+            textColor: {
+                "name": "Чёрный",
+                "value": "#000000 "
+            },
         }
     )
     const additionalSettings = ref({

@@ -5,7 +5,7 @@
 .words-creator {
   font-family: "Montserrat", sans-serif;
   max-width: 900px;
-  background-color: #ebf4ff;
+  // background-color: #ebf4ff;
   margin: 20px auto;
 }
 
@@ -32,7 +32,6 @@
   width: 100%;
   display: flex;
   align-items: center;
-  margin-bottom: 8px;
 }
 .word__remove {
   cursor: pointer;
@@ -72,6 +71,7 @@
   color: #262b31;
   font-weight: 500;
   color: rgba(38, 43, 49, 1);
+  margin-bottom: 10px;
 }
 .word__descr {
   font-size: 14px;
@@ -117,4 +117,44 @@
   svg {
     margin-left: 10px;
   }
+}
+
+.settings-item {
+  margin-bottom: 20px;
+  background-color: #ebf4ff;
+}
+
+.plus-btn {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='19' height='20' viewBox='0 0 19 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M16.0875 10.681H10.1975V16.416H8.8025V10.681H2.9125V9.34803H8.8025V3.58203H10.1975V9.34803H16.0875V10.681Z' fill='%23262B31'/%3e%3c/svg%3e ");
+}
+.minus-btn {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='19' height='20' viewBox='0 0 19 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M3.5165 9.30273H15.4835V10.6977H3.5165V9.30273Z' fill='%23262B31'/%3e%3c/svg%3e ");
+}
+
+.plus-btn,
+.minus-btn {
+  background-repeat: no-repeat;
+  width: 19px;
+  height: 19px;
+  border: none;
+  cursor: pointer;
+  will-change: transform;
+  transition: transform 0.2s ease-in-out;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.countere-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 21px;
+}
+
+.count-input {
+  outline: none;
+  text-align: center;
+  padding: 12px;
+  border: 1px solid rgba(194, 207, 224, 1);
+  border-radius: 4px;
+  max-width: 80px;
 }
