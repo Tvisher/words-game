@@ -14,6 +14,7 @@
     :title="'6. Цвет текста кнопок'"
     :descr="'Выберите цвет для текста в кнопках'"
   />
+  <SettingsBlock />
 </template>
 <script setup>
 import WordsList from "./WordsList.vue";
@@ -21,5 +22,6 @@ import GameDescription from "./GameDescription.vue";
 import gameTestCount from "./gameTestCount.vue";
 import AddBackground from "./AddBackground.vue";
 import ColorSelection from "./ColorSelection.vue";
+import SettingsBlock from "./SettingsBlock.vue";
 </script>
 <style lang="scss"></style>

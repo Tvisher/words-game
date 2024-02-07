@@ -67,7 +67,9 @@ const props = defineProps({
   wordsLength: Number,
 });
 const wordData = props.wordData;
+
 const editLetter = ($event, index) => {
+  console.log("editLetter", index);
   let value = $event.target.value;
   value = value[value.length - 1];
   const russianLettersRegex = /^[а-яё]+$/i;
@@ -76,6 +78,7 @@ const editLetter = ($event, index) => {
   }
   $event.target.value = value;
   wordData.word[index] = value;
+
   const nextInput = $event.target.nextSibling;
   if (nextInput.tagName == "INPUT" && value) {
     nextInput.focus();
@@ -90,6 +93,17 @@ const focusInput = (e) => {
     emptyLetter.focus();
   }
 };
+//  @keydown="handleKeyDown($event, index)"
+// const handleKeyDown = ($event, index) => {
+//   console.log("handleKeyDown", index);
+//   if ($event.keyCode === 8) {
+//     wordData.word.splice(index, 1);
+//     const prevInput = $event.target.previousSibling;
+//     if (prevInput.tagName == "INPUT") {
+//       prevInput.focus();
+//     }
+//   }
+// };
 
 console.log(props.wordData);
 </script>

@@ -8,7 +8,7 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const wordsList = ref([
         {
             id: "1",
-            word: ["с", "л", "о", "в", "о",],
+            word: ["с", "л", "о", "в", "о"],
             theme: "Букварь какой нибудь",
             prompt: "Это буквально 'СЛОВО'"
         }
