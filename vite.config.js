@@ -5,6 +5,9 @@ import path from 'path';
 
 export default defineConfig({
   plugins: [vue()],
+  optimizeDeps: {
+    exclude: ['js-big-decimal']
+  },
   base: './',
   build: {
     outDir: './docs',

@@ -15,22 +15,27 @@
           <div class="toggle-option__text">Ограничить время игры?</div>
         </label>
       </div>
-      <div
-        class="limit-time-wrapper"
-        v-if="additionalSettings.limitPlayTime.enable"
+      <Vue3SlideUpDown
+        v-model="additionalSettings.limitPlayTime.enable"
+        :duration="300"
       >
-        <div class="time-wrapper__title">Укажите сколько минут</div>
-        <div class="counter-wrapper">
-          <button class="minus-btn" @click="setMinutesCount('minus')"></button>
-          <input
-            v-model="additionalSettings.limitPlayTime.minutesCount"
-            type="text"
-            class="count-input"
-            readonly
-          />
-          <button class="plus-btn" @click="setMinutesCount('plus')"></button>
+        <div class="limit-time-wrapper">
+          <div class="time-wrapper__title">Укажите сколько минут</div>
+          <div class="counter-wrapper">
+            <button
+              class="minus-btn"
+              @click="setMinutesCount('minus')"
+            ></button>
+            <input
+              v-model="additionalSettings.limitPlayTime.minutesCount"
+              type="text"
+              class="count-input"
+              readonly
+            />
+            <button class="plus-btn" @click="setMinutesCount('plus')"></button>
+          </div>
         </div>
-      </div>
+      </Vue3SlideUpDown>
       <div class="toggle-option">
         <label class="toggle-option__label">
           <input
@@ -63,6 +68,8 @@
 </template>
 
 <script setup>
+import { Vue3SlideUpDown } from "vue3-slide-up-down";
+
 import { useGameSettings } from "@/stores/GameSettings";
 import { storeToRefs } from "pinia";
 const store = useGameSettings();
@@ -152,6 +159,6 @@ const setMinutesCount = (type) => {
 .toggle-option {
   display: flex;
   align-items: center;
-  margin: 20px 0;
+  padding: 10px 0;
 }
 </style>
