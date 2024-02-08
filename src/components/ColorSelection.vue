@@ -48,7 +48,10 @@
           <div
             class="color-ex"
             :style="{
-              backgroundColor: pureColor,
+              background:
+                isCustomColor && pureColor
+                  ? pureColor
+                  : 'conic-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red)',
             }"
           ></div>
           <ColorPicker
@@ -184,7 +187,6 @@ const pureColorChange = (e) => {
 }
 
 .color-ex {
-  background-color: #fff;
   width: 24px !important;
   height: 24px !important;
   border-radius: 50%;
@@ -194,5 +196,6 @@ const pureColorChange = (e) => {
   left: 10px;
   top: 50%;
   transform: translateY(-50%);
+  // background: conic-gradient(red, #ff0, #0f0, #0ff, #00f, #f0f, red);
 }
 </style>

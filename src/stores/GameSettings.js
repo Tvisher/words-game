@@ -9,11 +9,11 @@ export const useGameSettings = defineStore("GameSettings", () => {
         {
             id: "1",
             word: [],
-            // word: 'слово',
             theme: "Букварь какой нибудь",
             prompt: "Это буквально 'СЛОВО'"
         }
     ]);
+    const wordsCountLimit = 3;
     const gameDescription = ref('');
     const gameResultMessage = ref('');
     // min 3 max 7
@@ -108,6 +108,7 @@ export const useGameSettings = defineStore("GameSettings", () => {
     };
 
     return {
+        wordsCountLimit,
         wordsList,
         gameDescription,
         testWordsCount,

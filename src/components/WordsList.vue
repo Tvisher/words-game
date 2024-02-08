@@ -12,7 +12,7 @@
           :wordsLength="wordsList.length"
           @wordRemove="wordRemove"
         />
-        <button class="add-word" @click="addWord">
+        <button v-if="isLimitOfWordsLength" class="add-word" @click="addWord">
           Добавить слово
           <svg
             width="10"
@@ -44,21 +44,28 @@
 </template>
 <script setup>
 import WordCreate from "./WordCreate.vue";
+import { computed } from "vue";
 import { useGameSettings } from "@/stores/GameSettings";
 import { storeToRefs } from "pinia";
 import { v4 as uuidv4 } from "uuid";
 
 const store = useGameSettings();
-
 const { wordsList } = storeToRefs(store);
+const wordsCountLimit = store.wordsCountLimit;
+
+const isLimitOfWordsLength = computed(
+  () => wordsList.value.length < wordsCountLimit
+);
 
 const addWord = () => {
-  wordsList.value.push({
-    id: uuidv4(),
-    word: [],
-    theme: "",
-    prompt: "",
-  });
+  if (wordsList.value.length < wordsCountLimit) {
+    wordsList.value.push({
+      id: uuidv4(),
+      word: [],
+      theme: "",
+      prompt: "",
+    });
+  }
 };
 
 const wordRemove = (id) => {

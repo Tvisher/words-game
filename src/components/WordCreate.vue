@@ -81,7 +81,6 @@ const editLetter = ($event, index) => {
   wordData.word[index] = value;
 
   if (!isKeyDownEvent.value) {
-    console.log(123123);
     const nextInput = $event.target.nextSibling;
     if (nextInput.tagName == "INPUT" && value) {
       nextInput.focus();
