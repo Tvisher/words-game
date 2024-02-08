@@ -8,12 +8,14 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const wordsList = ref([
         {
             id: "1",
-            word: ["с", "л", "о", "в", "о"],
+            word: [],
+            // word: 'слово',
             theme: "Букварь какой нибудь",
             prompt: "Это буквально 'СЛОВО'"
         }
     ]);
     const gameDescription = ref('');
+    const gameResultMessage = ref('');
     // min 3 max 7
     const testWordsCount = ref(3);
     const backgroundUrl = ref({
@@ -88,7 +90,6 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const additionalSettings = ref({
         limitPlayTime: {
             enable: true,
-            // min 1 max 59
             minutesCount: 10,
         },
         allowReplay: true,
@@ -100,8 +101,6 @@ export const useGameSettings = defineStore("GameSettings", () => {
 
 
     // Actions
-
-
     const getAppData = async (timeFilter) => {
         return new Promise((resolve, reject) => {
 
@@ -116,5 +115,6 @@ export const useGameSettings = defineStore("GameSettings", () => {
         colors,
         selectedColors,
         additionalSettings,
+        gameResultMessage,
     }
 }) 

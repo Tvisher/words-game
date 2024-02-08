@@ -39,6 +39,7 @@
       class="letter-input"
       @input="editLetter($event, index)"
       @focus="focusInput"
+      @keydown="handleKeyDown($event, index)"
     />
   </div>
   <div class="word__field">
@@ -59,9 +60,9 @@
   </div>
 </template>
 <script setup>
-import { defineEmits } from "vue";
+import { defineEmits, ref } from "vue";
 const emit = defineEmits(["wordRemove"]);
-
+const isKeyDownEvent = ref(false);
 const props = defineProps({
   wordData: Object,
   wordsLength: Number,
@@ -69,9 +70,9 @@ const props = defineProps({
 const wordData = props.wordData;
 
 const editLetter = ($event, index) => {
-  console.log("editLetter", index);
   let value = $event.target.value;
   value = value[value.length - 1];
+
   const russianLettersRegex = /^[а-яё]+$/i;
   if (!russianLettersRegex.test(value)) {
     value = "";
@@ -79,10 +80,14 @@ const editLetter = ($event, index) => {
   $event.target.value = value;
   wordData.word[index] = value;
 
-  const nextInput = $event.target.nextSibling;
-  if (nextInput.tagName == "INPUT" && value) {
-    nextInput.focus();
+  if (!isKeyDownEvent.value) {
+    console.log(123123);
+    const nextInput = $event.target.nextSibling;
+    if (nextInput.tagName == "INPUT" && value) {
+      nextInput.focus();
+    }
   }
+  isKeyDownEvent.value = false;
 };
 const focusInput = (e) => {
   const target = e.target;
@@ -93,18 +98,18 @@ const focusInput = (e) => {
     emptyLetter.focus();
   }
 };
-//  @keydown="handleKeyDown($event, index)"
-// const handleKeyDown = ($event, index) => {
-//   console.log("handleKeyDown", index);
-//   if ($event.keyCode === 8) {
-//     wordData.word.splice(index, 1);
-//     const prevInput = $event.target.previousSibling;
-//     if (prevInput.tagName == "INPUT") {
-//       prevInput.focus();
-//     }
-//   }
-// };
+const handleKeyDown = ($event, index) => {
+  if ($event.keyCode === 8 && $event.target.value == "") {
+    console.log("handleKeyDown");
 
-console.log(props.wordData);
+    isKeyDownEvent.value = true;
+    const prevInput = $event.target.previousSibling;
+    if (prevInput.tagName == "INPUT") {
+      prevInput.focus();
+    }
+  } else {
+    isKeyDownEvent.value = false;
+  }
+};
 </script>
 <style lang="scss"></style>

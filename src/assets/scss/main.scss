@@ -9,7 +9,8 @@
   margin: 20px auto;
 }
 
-.letter-input {
+.letter-input,
+.letter-inputs input {
   font-family: "Inter", sans-serif;
   text-transform: uppercase;
   width: 48px;
@@ -22,7 +23,8 @@
   margin: 0;
   outline: none;
 }
-.word-letters {
+.word-letters,
+.letter-inputs {
   margin: 20px 0;
   display: flex;
   gap: 10px;
