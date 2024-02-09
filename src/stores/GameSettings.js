@@ -8,15 +8,15 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const wordsList = ref([
         {
             id: "1",
-            word: [],
-            theme: "Букварь какой нибудь",
-            prompt: "Это буквально 'СЛОВО'"
+            word: "строка",
+            theme: "",
+            prompt: "",
+            valid: false
         }
     ]);
     const wordsCountLimit = 3;
     const gameDescription = ref('');
     const gameResultMessage = ref('');
-    // min 3 max 7
     const testWordsCount = ref(3);
     const backgroundUrl = ref({
         name: '',
@@ -96,15 +96,43 @@ export const useGameSettings = defineStore("GameSettings", () => {
         disableRepeatUsername: true,
 
     });
+    const checkValidate = ref(false);
 
     // getters
 
 
     // Actions
-    const getAppData = async (timeFilter) => {
+    const getAppData = async () => {
         return new Promise((resolve, reject) => {
 
         })
+    };
+
+    const getWordsValid = async () => {
+        checkValidate.value = true;
+        const promises = wordsList.value.map(word => {
+            return new Promise((resolve, reject) => {
+                axios
+                    .get(
+                        `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20240209T122003Z.8550ea5c2adb40b7.ab65585ec4b71375b975906f73afa4ea1ba17a6a&lang=ru-ru&text=${word.word}`
+                    )
+                    .then((res) => {
+                        console.log(res.data);
+                        if (res.data.def.length > 0) {
+                            word.valid = true;
+                            resolve(res)
+                        } else {
+                            throw new Error(`Слова "${word.word}" не существует`)
+                        }
+                    })
+                    .catch((err) => {
+                        word.valid = false;
+                        reject(err)
+                    });
+            });
+        });
+
+        return Promise.all(promises)
     };
 
     return {
@@ -117,5 +145,7 @@ export const useGameSettings = defineStore("GameSettings", () => {
         selectedColors,
         additionalSettings,
         gameResultMessage,
+        checkValidate,
+        getWordsValid
     }
 }) 

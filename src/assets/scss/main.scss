@@ -25,9 +25,12 @@
 }
 .word-letters,
 .letter-inputs {
-  margin: 20px 0;
+  margin-top: 20px;
   display: flex;
   gap: 10px;
+}
+.word__info-block {
+  margin-bottom: 20px;
 }
 
 .word__title-wrapper {
@@ -53,6 +56,8 @@
 }
 
 .word-textarea {
+  display: block;
+  outline: none;
   resize: none;
   width: 100%;
   min-height: 100px;
@@ -64,6 +69,17 @@
   text-align: left;
   width: 100%;
   margin: 20px 0;
+  &.has-error {
+    .error-message {
+      display: block;
+    }
+    .word-textarea {
+      border-color: red;
+    }
+    .word__title {
+      color: red;
+    }
+  }
 }
 .word__title {
   color: #262b31;
@@ -157,4 +173,42 @@
   max-width: 80px;
   font-size: 16px;
   font-weight: 500;
+}
+
+.settings-footer {
+  padding: 20px;
+  background: rgba(236, 244, 255, 1);
+  display: flex;
+  .complite-btn {
+    margin: auto;
+    cursor: pointer;
+    padding: 12px 24px;
+    background: rgba(250, 0, 86, 1);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    border: none;
+  }
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  display: none;
+  margin: 10px 0;
+}
+
+.word__info-block {
+  &.empty-word {
+    .error-message {
+      display: block;
+    }
+    .word-textarea {
+      border-color: red;
+    }
+    .word__title {
+      color: red;
+    }
+  }
 }

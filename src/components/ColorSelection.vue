@@ -55,7 +55,7 @@
             }"
           ></div>
           <ColorPicker
-            :format="'hex'"
+            format="rgb"
             :disableHistory="true"
             v-model:pureColor="pureColor"
             @pureColorChange="pureColorChange"
@@ -72,13 +72,14 @@ import { ref, computed } from "vue";
 import { ColorPicker } from "vue3-colorpicker";
 import "vue3-colorpicker/style.css";
 import { useGameSettings } from "@/stores/GameSettings";
+import { storeToRefs } from "pinia";
+
 const props = defineProps({
   colorsType: String,
   title: String,
   descr: String,
 });
 
-import { storeToRefs } from "pinia";
 const store = useGameSettings();
 const { colors, selectedColors } = storeToRefs(store);
 

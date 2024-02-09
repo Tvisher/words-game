@@ -11,6 +11,7 @@
           :wordData="word"
           :wordsLength="wordsList.length"
           @wordRemove="wordRemove"
+          @wordUpdate="wordUpdate"
         />
         <button v-if="isLimitOfWordsLength" class="add-word" @click="addWord">
           Добавить слово
@@ -61,11 +62,16 @@ const addWord = () => {
   if (wordsList.value.length < wordsCountLimit) {
     wordsList.value.push({
       id: uuidv4(),
-      word: [],
+      word: "",
       theme: "",
       prompt: "",
     });
   }
+};
+
+const wordUpdate = ({ newWord, wordId }) => {
+  const currentWord = wordsList.value.find((word) => word.id === wordId);
+  currentWord.word = newWord;
 };
 
 const wordRemove = (id) => {
