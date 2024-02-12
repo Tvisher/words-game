@@ -1,5 +1,8 @@
 <template>
-  <div class="word__info-block" :class="{ 'empty-word': isEmptyWord }">
+  <div
+    class="word__info-block"
+    :class="{ 'empty-word': isEmptyWord, 'invalid-word': isInvalidWord }"
+  >
     <div class="word__title-wrapper">
       <div class="word__title">Введите слово *</div>
       <div
@@ -44,6 +47,9 @@
       />
     </div>
     <div class="error-message">Необходимо заполнить слово</div>
+    <div class="invalid-word_message error-message">
+      Такого слова нет в толколов словаре
+    </div>
   </div>
   <div class="word__field" :class="{ 'has-error': isEmptyTheme }">
     <div class="word__title">Укажите тему загаданного слова *</div>
@@ -90,9 +96,13 @@ const isEmptyWord = computed(() => {
   const fieldWord = wordToArray
     .map((letter) => (letter ? letter : "*"))
     .join("");
-  // console.log(fieldWord);
+  console.log(fieldWord);
 
   return checkValidate.value && wordToArray.join("") === "";
+});
+
+const isInvalidWord = computed(() => {
+  return checkValidate.value && !wordData.valid && wordData.word.length > 0;
 });
 
 const editLetter = ($event, index) => {
@@ -113,6 +123,7 @@ const editLetter = ($event, index) => {
     }
   }
   isKeyDownEvent.value = false;
+  wordData.valid = true;
 };
 const focusInput = (e) => {
   const target = e.target;

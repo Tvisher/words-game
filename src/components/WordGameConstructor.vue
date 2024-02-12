@@ -18,12 +18,15 @@
   <GameResultMessage />
 
   <div class="settings-footer">
-    <button class="complite-btn" @click="validAndGo">
-      Я готов! Собрать и смотреть
+    <button class="complite-btn" :class="{ sending }" @click="validAndGo">
+      <div class="spinvhik"></div>
+      <span class="complite-btn__text">Я готов! Собрать и смотреть</span>
     </button>
   </div>
 </template>
 <script setup>
+import { ref } from "vue";
+
 import WordsList from "./WordsList.vue";
 import GameDescription from "./GameDescription.vue";
 import gameTestCount from "./gameTestCount.vue";
@@ -34,15 +37,46 @@ import GameResultMessage from "./GameResultMessage.vue";
 
 import { useGameSettings } from "@/stores/GameSettings";
 const store = useGameSettings();
+const sending = ref(false);
 
-const validAndGo = () =>
+const validAndGo = (e) => {
+  if (sending.value) return;
+  sending.value = true;
   store
     .getWordsValid()
     .then((results) => {
       console.log("Все слова валидны");
+      setTimeout(() => {
+        sending.value = false;
+        if (scrollToErrors()) {
+          store.setAppData();
+        }
+      }, 500);
     })
     .catch((error) => {
       console.error(error);
+      setTimeout(() => {
+        sending.value = false;
+        scrollToErrors();
+      }, 500);
     });
+};
+
+const scrollToErrors = () => {
+  const parentContainer = document.querySelector(".words-creator");
+  const errors = parentContainer.querySelectorAll(
+    ".has-error,.empty-word,.invalid-word"
+  );
+  console.log(errors);
+  if (errors.length > 0) {
+    errors[0].scrollIntoView({
+      behavior: "smooth",
+      block: "center",
+      inline: "start",
+    });
+    return false;
+  }
+  return true;
+};
 </script>
 <style lang="scss"></style>

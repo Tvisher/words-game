@@ -8,10 +8,11 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const wordsList = ref([
         {
             id: "1",
-            word: "строка",
+            // word: "строка",
+            word: "",
             theme: "",
             prompt: "",
-            valid: false
+            valid: true
         }
     ]);
     const wordsCountLimit = 3;
@@ -111,7 +112,12 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const getWordsValid = async () => {
         checkValidate.value = true;
         const promises = wordsList.value.map(word => {
+
             return new Promise((resolve, reject) => {
+                if (!word.word.length) {
+                    reject('Слово не заполнено');
+                    return
+                }
                 axios
                     .get(
                         `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20240209T122003Z.8550ea5c2adb40b7.ab65585ec4b71375b975906f73afa4ea1ba17a6a&lang=ru-ru&text=${word.word}`
@@ -130,12 +136,29 @@ export const useGameSettings = defineStore("GameSettings", () => {
                         reject(err)
                     });
             });
+
         });
 
         return Promise.all(promises)
     };
 
+    const setAppData = async () => {
+        return new Promise((resolve, reject) => {
+            const wordGameAppData = {
+                wordsList: wordsList.value,
+                gameDescription: gameDescription.value,
+                gameResultMessage: gameResultMessage.value,
+                backgroundUrl: backgroundUrl.value,
+                selectedColors: selectedColors.value,
+                additionalSettings: additionalSettings.value
+            }
+            console.log(wordGameAppData);
+
+        })
+    };
+
     return {
+        setAppData,
         wordsCountLimit,
         wordsList,
         gameDescription,
