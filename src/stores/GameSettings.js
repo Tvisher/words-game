@@ -150,7 +150,8 @@ export const useGameSettings = defineStore("GameSettings", () => {
                 gameResultMessage: gameResultMessage.value,
                 backgroundUrl: backgroundUrl.value,
                 selectedColors: selectedColors.value,
-                additionalSettings: additionalSettings.value
+                additionalSettings: additionalSettings.value,
+                testWordsCount: testWordsCount.value
             }
             console.log(wordGameAppData);
 
