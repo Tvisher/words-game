@@ -113,11 +113,11 @@ function onDrop(acceptFile, errors) {
 
 const saveFiles = (acceptFile) => {
   const formData = new FormData();
-  formData.append("poll", acceptFile[0]);
+  formData.append("gameword", acceptFile[0]);
   loading.value = true;
   axios({
     method: "post",
-    url: "/local/templates/quiz/files.php",
+    url: "/local/templates/gameword/files.php",
     data: formData,
     headers: { "Content-Type": "multipart/form-data" },
   })

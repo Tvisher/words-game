@@ -2,13 +2,13 @@ import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import axios from 'axios';
 
-const wordsGameId = document.querySelector('#app').dataset.id;
+const wordsGameId = document.querySelector('#app').dataset.gameId;
+console.log(wordsGameId);
 export const useGameSettings = defineStore("GameSettings", () => {
     // state refs
     const wordsList = ref([
         {
             id: "1",
-            // word: "строка",
             word: "",
             theme: "",
             prompt: "",
@@ -104,8 +104,15 @@ export const useGameSettings = defineStore("GameSettings", () => {
 
     // Actions
     const getAppData = async () => {
+        console.log('getAppData');
         return new Promise((resolve, reject) => {
-
+            axios.get('/local/templates/gameword/itemjson.php', {
+                params: {
+                    id: wordsGameId,
+                }
+            })
+                .then((response) => resolve(response))
+                .catch((error) => reject(error));
         })
     };
 
@@ -153,12 +160,35 @@ export const useGameSettings = defineStore("GameSettings", () => {
                 additionalSettings: additionalSettings.value,
                 testWordsCount: testWordsCount.value
             }
-            console.log(wordGameAppData);
+            const jsonData = JSON.stringify(wordGameAppData);
+
+            axios.post('/local/templates/gameword/itemjson.php',
+                {
+                    id: wordsGameId,
+                    payload: jsonData,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+                })
+                .then(function (response) {
+                    console.log(response);
+                    resolve(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    reject(error);
+                });
 
         })
     };
 
+
+
+
     return {
+        getAppData,
         setAppData,
         wordsCountLimit,
         wordsList,
