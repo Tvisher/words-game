@@ -1,7 +1,7 @@
 <template>
   <div class="settings-item">
     <div class="toggle-head">
-      <span>3. Проверочные слова</span>
+      <span>4. Проверочные слова</span>
     </div>
     <div class="toggle-body">
       <div class="word__title">

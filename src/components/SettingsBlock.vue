@@ -1,7 +1,7 @@
 <template>
   <div class="settings-item">
     <div class="toggle-head">
-      <span>6. Дополнительные настройки</span>
+      <span>8. Дополнительные настройки</span>
     </div>
     <div class="toggle-body">
       <div class="toggle-option">
@@ -36,7 +36,7 @@
           </div>
         </div>
       </Vue3SlideUpDown>
-      <div class="toggle-option">
+      <!-- <div class="toggle-option">
         <label class="toggle-option__label">
           <input
             type="checkbox"
@@ -48,7 +48,7 @@
             Запретить повтор username в рейтинге?
           </div>
         </label>
-      </div>
+      </div> -->
 
       <div class="toggle-option">
         <label class="toggle-option__label">
@@ -61,6 +61,18 @@
           <div class="toggle-option__text">
             Разрешить повторное прохождение?
           </div>
+        </label>
+      </div>
+
+      <div class="toggle-option">
+        <label class="toggle-option__label">
+          <input
+            type="checkbox"
+            v-model="additionalSettings.hideFooterBlock"
+            name="hideFooterBlock"
+            class="toggle-option__cb"
+          />
+          <div class="toggle-option__text">Скрыть подвал игры ?</div>
         </label>
       </div>
     </div>

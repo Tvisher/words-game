@@ -1,7 +1,7 @@
 <template>
   <div class="settings-item">
     <div class="toggle-head">
-      <span>4. Фон</span>
+      <span>5. Фон</span>
     </div>
     <div class="toggle-body">
       <div class="word__title">Выберите фон для игры</div>
@@ -58,7 +58,7 @@
               </div>
               <div class="poll-dropzone__descr">
                 Максималяный размер файла
-                <span class="take-note">{{ 1.5 }} МБ</span>
+                <span class="take-note">{{ 10 }} МБ</span>
               </div>
             </div>
           </div>
@@ -141,7 +141,7 @@ const saveFiles = (acceptFile) => {
 
 const options = {
   multiple: false,
-  maxSize: Number(1.5) * 1000000,
+  maxSize: Number(10) * 1000000,
   onDrop,
   accept: [".jpg", ".jpeg", ".png"],
 };

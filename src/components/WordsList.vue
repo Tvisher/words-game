@@ -1,7 +1,7 @@
 <template>
   <div class="settings-item">
     <div class="toggle-head">
-      <span>1. Слово</span>
+      <span>2. Слово</span>
     </div>
     <div class="toggle-body">
       <div class="word__container">

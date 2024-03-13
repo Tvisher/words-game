@@ -17,6 +17,7 @@ export const useGameSettings = defineStore("GameSettings", () => {
     ]);
     const wordsCountLimit = 3;
     const gameDescription = ref('');
+    const gameTitle = ref('');
     const gameResultMessage = ref('');
     const testWordsCount = ref(3);
     const backgroundUrl = ref({
@@ -95,23 +96,37 @@ export const useGameSettings = defineStore("GameSettings", () => {
         },
         allowReplay: true,
         disableRepeatUsername: true,
+        hideFooterBlock: false,
 
     });
     const checkValidate = ref(false);
 
-    // getters
-
-
     // Actions
     const getAppData = async () => {
-        console.log('getAppData');
         return new Promise((resolve, reject) => {
             axios.get('/local/templates/gameword/itemjson.php', {
                 params: {
                     id: wordsGameId,
                 }
             })
-                .then((response) => resolve(response))
+                .then((response) => {
+                    if (process.env.NODE_ENV === "development") {
+                        resolve();
+                        return;
+                    }
+                    let result = response.data;
+                    if (result) {
+                        result = JSON.parse(result);
+                        wordsList.value = result.wordsList;
+                        gameDescription.value = result.gameDescription;
+                        gameResultMessage.value = result.gameResultMessage;
+                        backgroundUrl.value = result.backgroundUrl;
+                        selectedColors.value = result.selectedColors;
+                        additionalSettings.value = result.additionalSettings;
+                        testWordsCount.value = result.testWordsCount;
+                    }
+                    resolve(response)
+                })
                 .catch((error) => reject(error));
         })
     };
@@ -119,29 +134,30 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const getWordsValid = async () => {
         checkValidate.value = true;
         const promises = wordsList.value.map(word => {
-
             return new Promise((resolve, reject) => {
                 if (!word.word.length) {
                     reject('Слово не заполнено');
                     return
                 }
-                axios
-                    .get(
-                        `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20240209T122003Z.8550ea5c2adb40b7.ab65585ec4b71375b975906f73afa4ea1ba17a6a&lang=ru-ru&text=${word.word}`
-                    )
-                    .then((res) => {
-                        console.log(res.data);
-                        if (res.data.def.length > 0) {
-                            word.valid = true;
-                            resolve(res)
-                        } else {
-                            throw new Error(`Слова "${word.word}" не существует`)
-                        }
-                    })
-                    .catch((err) => {
-                        word.valid = false;
-                        reject(err)
-                    });
+                word.valid = true;
+                resolve()
+                // axios
+                //     .get(
+                //         `https://dictionary.yandex.net/api/v1/dicservice.json/lookup?key=dict.1.1.20240209T122003Z.8550ea5c2adb40b7.ab65585ec4b71375b975906f73afa4ea1ba17a6a&lang=ru-ru&text=${word.word}`
+                //     )
+                //     .then((res) => {
+                //         console.log(res.data);
+                //         if (res.data.def.length > 0) {
+                //             word.valid = true;
+                //             resolve(res)
+                //         } else {
+                //             throw new Error(`Слова "${word.word}" не существует`)
+                //         }
+                //     })
+                //     .catch((err) => {
+                //         word.valid = false;
+                //         reject(err)
+                //     });
             });
 
         });
@@ -173,21 +189,18 @@ export const useGameSettings = defineStore("GameSettings", () => {
                     }
                 })
                 .then(function (response) {
-                    console.log(response);
+                    window.location.href = `/lk/gameword/game/?id=${wordsGameId}`;
                     resolve(response);
                 })
                 .catch(function (error) {
                     console.log(error);
                     reject(error);
                 });
-
         })
     };
 
-
-
-
     return {
+        gameTitle,
         getAppData,
         setAppData,
         wordsCountLimit,

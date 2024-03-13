@@ -1,17 +1,38 @@
 <template>
+  <div class="t-wtapper">
+    <h1 class="settings-title">Создание игры</h1>
+    <a class="back-btn" href="/lk/gameword/"
+      ><svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="#fff"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <line x1="20" y1="12" x2="4" y2="12"></line>
+        <polyline points="10 18 4 12 10 6"></polyline>
+      </svg>
+      Главное меню
+    </a>
+  </div>
+  <GameTitle />
   <WordsList />
   <GameDescription />
   <gameTestCount />
   <AddBackground />
   <ColorSelection
     :colorsType="'borderColor'"
-    :title="'5. Цвета полей'"
+    :title="'6. Цвета полей'"
     :descr="'Выберите цвет полей'"
   />
 
   <ColorSelection
     :colorsType="'textColor'"
-    :title="'6. Цвет текста кнопок'"
+    :title="'7. Цвет текста кнопок'"
     :descr="'Выберите цвет для текста в кнопках'"
   />
   <SettingsBlock />
@@ -28,6 +49,7 @@
 import { ref } from "vue";
 
 import WordsList from "./WordsList.vue";
+import GameTitle from "./GameTitle.vue";
 import GameDescription from "./GameDescription.vue";
 import gameTestCount from "./gameTestCount.vue";
 import AddBackground from "./AddBackground.vue";
@@ -47,11 +69,12 @@ const validAndGo = (e) => {
     .then((results) => {
       console.log("Все слова валидны");
       setTimeout(() => {
-        sending.value = false;
         if (scrollToErrors()) {
           store.setAppData();
+        } else {
+          sending.value = false;
         }
-      }, 500);
+      }, 800);
     })
     .catch((error) => {
       console.error(error);

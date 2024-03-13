@@ -1,15 +1,15 @@
 <template>
   <div class="settings-item">
     <div class="toggle-head">
-      <span>8. Итог</span>
+      <span>1. Заголовок игры</span>
     </div>
     <div class="toggle-body">
       <div class="word__title">
-        Форма текста после завершения игры (выводится в таблице результатов)
+        Заголовок вашей игры который будет отображаться на странице
       </div>
       <textarea
-        placeholder="Какое то описание игры"
-        v-model="gameResultMessage"
+        placeholder="Например: «Игра на знание корпоративных терминов»"
+        v-model="gameTitle"
         class="word-textarea"
       ></textarea>
     </div>
@@ -18,6 +18,6 @@
 <script setup>
 import { useGameSettings } from "@/stores/GameSettings";
 import { storeToRefs } from "pinia";
-const { gameResultMessage } = storeToRefs(useGameSettings());
+const { gameTitle } = storeToRefs(useGameSettings());
 </script>
 <style lang="scss"></style>

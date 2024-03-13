@@ -47,9 +47,9 @@
       />
     </div>
     <div class="error-message">Необходимо заполнить слово</div>
-    <div class="invalid-word_message error-message">
+    <!-- <div class="invalid-word_message error-message">
       Такого слова нет в толколов словаре
-    </div>
+    </div> -->
   </div>
   <div class="word__field" :class="{ 'has-error': isEmptyTheme }">
     <div class="word__title">Укажите тему загаданного слова *</div>

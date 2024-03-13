@@ -1,7 +1,7 @@
 <template>
   <div class="settings-item">
     <div class="toggle-head">
-      <span>2. Описание игры</span>
+      <span>3. Описание игры</span>
     </div>
     <div class="toggle-body">
       <div class="word__title">Добавить свой текст</div>
