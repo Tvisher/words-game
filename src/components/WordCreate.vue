@@ -38,7 +38,7 @@
     <div class="word-letters">
       <input
         type="text"
-        v-for="(num, index) in 12"
+        v-for="(num, index) in 10"
         :value="wordToArray[index]"
         class="letter-input"
         @input="editLetter($event, index)"

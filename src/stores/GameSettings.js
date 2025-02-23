@@ -117,6 +117,7 @@ export const useGameSettings = defineStore("GameSettings", () => {
                     let result = response.data;
                     if (result) {
                         result = JSON.parse(result);
+                        gameTitle.value = result.gameTitle;
                         wordsList.value = result.wordsList;
                         gameDescription.value = result.gameDescription;
                         gameResultMessage.value = result.gameResultMessage;
@@ -168,6 +169,7 @@ export const useGameSettings = defineStore("GameSettings", () => {
     const setAppData = async () => {
         return new Promise((resolve, reject) => {
             const wordGameAppData = {
+                gameTitle: gameTitle.value,
                 wordsList: wordsList.value,
                 gameDescription: gameDescription.value,
                 gameResultMessage: gameResultMessage.value,
